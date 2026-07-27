@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mohamed Mahmoud — Full-Stack Developer &amp; AI Engineer</title>
+<meta name="description" content="Mohamed Mahmoud — Full-Stack Developer, Data Scientist &amp; AI Engineer based in Assiut, Egypt.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink: #1c2033;
+    --ink-dim: #5b6178;
+    --ink-faint: #8b91a5;
+    --glass: rgba(255,255,255,0.62);
+    --glass-strong: rgba(255,255,255,0.82);
+    --glass-border: rgba(255,255,255,0.75);
+    --hairline: rgba(28,32,51,0.08);
+    --indigo: #5b5ff2;
+    --teal: #12b8a4;
+    --amber: #f5a623;
+    --coral: #f2554d;
+    --display: 'Space Grotesk', sans-serif;
+    --sans: 'Inter', system-ui, sans-serif;
+    --mono: 'JetBrains Mono', ui-monospace, monospace;
+  }
+
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+
+  body{
+    font-family:var(--sans);
+    color:var(--ink);
+    background:#eef1fb;
+    min-height:100vh;
+    line-height:1.6;
+  }
+
+  /* gradient mesh backdrop */
+  .mesh{
+    position:fixed; inset:0; z-index:0; overflow:hidden; pointer-events:none;
+  }
+  .blob{
+    position:absolute; border-radius:50%; filter:blur(70px); opacity:0.55;
+    animation: drift 22s ease-in-out infinite;
+  }
+  .blob.b1{ width:520px; height:520px; background:#a5b4fc; top:-160px; left:-120px; }
+  .blob.b2{ width:460px; height:460px; background:#7dd3c8; top:120px; right:-140px; animation-delay:-6s; }
+  .blob.b3{ width:420px; height:420px; background:#fcd9a5; bottom:-140px; left:20%; animation-delay:-12s; }
+  .blob.b4{ width:380px; height:380px; background:#f2b6d0; bottom:0; right:10%; animation-delay:-3s; }
+  @keyframes drift{
+    0%, 100%{ transform:translate(0,0) scale(1); }
+    50%{ transform:translate(30px,-25px) scale(1.06); }
+  }
+  @media (prefers-reduced-motion: reduce){ .blob{ animation:none; } }
+
+  a{ color:inherit; text-decoration:none; }
+  ::selection{ background:var(--indigo); color:#fff; }
+
+  .wrap{ max-width:1040px; margin:0 auto; padding:0 24px; position:relative; z-index:1; }
+
+  /* ---------- glass primitives ---------- */
+  .glass{
+    background:var(--glass);
+    border:1px solid var(--glass-border);
+    backdrop-filter:blur(18px);
+    -webkit-backdrop-filter:blur(18px);
+    border-radius:18px;
+    box-shadow:0 8px 32px -12px rgba(28,32,51,0.18);
+  }
+
+  /* ---------- Nav ---------- */
+  nav{ position:sticky; top:16px; z-index:50; padding-top:16px; }
+  .navbar{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:12px 20px; border-radius:16px;
+  }
+  .brand{ display:flex; align-items:center; gap:10px; }
+  .brand-mark{
+    width:32px; height:32px; border-radius:9px;
+    background:linear-gradient(135deg, var(--indigo), var(--teal));
+    display:flex; align-items:center; justify-content:center;
+    color:#fff; font-family:var(--display); font-weight:700; font-size:14px;
+  }
+  .brand-name{ font-family:var(--display); font-weight:700; font-size:15px; }
+  .tabs{ display:flex; gap:4px; background:rgba(28,32,51,0.05); padding:4px; border-radius:12px; }
+  .tabs a{
+    font-size:13px; font-weight:600; padding:8px 14px; border-radius:9px; color:var(--ink-dim);
+    transition:all .2s;
+  }
+  .tabs a:hover{ color:var(--ink); background:rgba(255,255,255,0.7); }
+  .nav-avatar{
+    width:36px; height:36px; border-radius:10px; overflow:hidden; border:2px solid #fff;
+    box-shadow:0 2px 10px rgba(28,32,51,0.15);
+  }
+  .nav-avatar img{ width:100%; height:100%; object-fit:cover; }
+  @media (max-width:720px){ .tabs{ display:none; } }
+
+  /* ---------- Hero ---------- */
+  .hero{ padding:52px 0 40px; }
+  .greeting{
+    font-family:var(--mono); font-size:13px; color:var(--ink-faint); margin-bottom:10px;
+  }
+  .greeting .dot{
+    display:inline-block; width:7px; height:7px; border-radius:50%; background:var(--teal);
+    margin-right:6px; box-shadow:0 0 0 4px rgba(18,184,164,0.18);
+  }
+  .hero-title{
+    font-family:var(--display); font-weight:700;
+    font-size:clamp(30px, 4.6vw, 46px); line-height:1.15; letter-spacing:-0.01em;
+    max-width:680px;
+  }
+  .hero-title .grad{
+    background:linear-gradient(90deg, var(--indigo), var(--teal));
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  .hero-sub{ margin-top:14px; max-width:520px; color:var(--ink-dim); font-size:15.5px; }
+  .hero-cta{ margin-top:26px; display:flex; gap:12px; flex-wrap:wrap; }
+  .btn{
+    font-family:var(--sans); font-size:14px; font-weight:600;
+    padding:12px 22px; border-radius:12px; transition:all .2s; display:inline-flex; align-items:center; gap:8px;
+  }
+  .btn-primary{
+    color:#fff; background:linear-gradient(135deg, var(--indigo), #7c7ff5);
+    box-shadow:0 8px 24px -8px rgba(91,95,242,0.55);
+  }
+  .btn-primary:hover{ transform:translateY(-1px); box-shadow:0 12px 28px -8px rgba(91,95,242,0.6); }
+  .btn-ghost{ color:var(--ink); background:var(--glass); border:1px solid var(--glass-border); }
+  .btn-ghost:hover{ background:var(--glass-strong); }
+
+  /* stat cards */
+  .stat-row{
+    display:grid; grid-template-columns:repeat(4, 1fr); gap:14px; margin-top:36px;
+  }
+  .stat-card{ padding:18px 18px; }
+  .stat-num{ font-family:var(--display); font-weight:700; font-size:26px; }
+  .stat-label{ font-family:var(--mono); font-size:11.5px; color:var(--ink-faint); margin-top:4px; }
+  .stat-card.i1 .stat-num{ color:var(--indigo); }
+  .stat-card.i2 .stat-num{ color:var(--teal); }
+  .stat-card.i3 .stat-num{ color:var(--amber); }
+  .stat-card.i4 .stat-num{ color:var(--coral); }
+  @media (max-width:720px){ .stat-row{ grid-template-columns:repeat(2,1fr); } }
+
+  /* ---------- Section shell ---------- */
+  section{ padding:44px 0; }
+  .section-head{ display:flex; align-items:center; gap:10px; margin-bottom:22px; }
+  .section-eyebrow{
+    font-family:var(--mono); font-size:11.5px; color:#fff; background:var(--indigo);
+    padding:4px 10px; border-radius:20px; letter-spacing:0.02em;
+  }
+  .section-title{ font-family:var(--display); font-weight:700; font-size:21px; }
+
+  .reveal{ opacity:0; transform:translateY(14px); transition:opacity .55s ease, transform .55s ease; }
+  .reveal.in{ opacity:1; transform:translateY(0); }
+
+  /* ---------- Projects ---------- */
+  .project-grid{ display:grid; grid-template-columns:repeat(2, 1fr); gap:18px; }
+  .project-card{ padding:0; overflow:hidden; display:flex; flex-direction:column; }
+  .project-top{ height:6px; }
+  .p1 .project-top{ background:linear-gradient(90deg, var(--indigo), #8b8ef5); }
+  .p2 .project-top{ background:linear-gradient(90deg, var(--teal), #6fe0d1); }
+  .p3 .project-top{ background:linear-gradient(90deg, var(--amber), #f7c766); }
+  .p4 .project-top{ background:linear-gradient(90deg, var(--coral), #f58a84); }
+  .project-inner{ padding:22px 22px 20px; flex:1; display:flex; flex-direction:column; }
+  .project-head{ display:flex; align-items:center; justify-content:space-between; gap:10px; }
+  .project-name{ font-family:var(--display); font-weight:700; font-size:16.5px; }
+  .badge{
+    font-family:var(--mono); font-size:10.5px; padding:4px 9px; border-radius:20px;
+    background:rgba(18,184,164,0.12); color:#0c9585; white-space:nowrap;
+  }
+  .badge.case{ background:rgba(245,166,35,0.14); color:#b9780f; }
+  .project-desc{ margin-top:10px; color:var(--ink-dim); font-size:13.8px; flex:1; }
+  .kpi-row{ display:flex; gap:16px; margin-top:16px; padding-top:14px; border-top:1px solid var(--hairline); }
+  .kpi{ }
+  .kpi-num{ font-family:var(--display); font-weight:700; font-size:17px; }
+  .kpi-label{ font-family:var(--mono); font-size:10px; color:var(--ink-faint); }
+  .tag-row{ display:flex; flex-wrap:wrap; gap:6px; margin-top:14px; }
+  .tag{
+    font-family:var(--mono); font-size:10.5px; color:var(--ink-dim);
+    background:rgba(28,32,51,0.05); padding:4px 8px; border-radius:6px;
+  }
+  .project-links{ margin-top:16px; display:flex; gap:14px; font-size:12.5px; font-weight:600; }
+  .project-links a{ color:var(--indigo); }
+  .project-links a:hover{ text-decoration:underline; }
+  @media (max-width:780px){ .project-grid{ grid-template-columns:1fr; } }
+
+  /* ---------- Skills ---------- */
+  .skill-grid{ display:grid; grid-template-columns:repeat(3, 1fr); gap:16px; }
+  .skill-card{ padding:20px; }
+  .skill-dot{ width:9px; height:9px; border-radius:50%; display:inline-block; margin-right:8px; }
+  .skill-cat{ font-family:var(--display); font-weight:700; font-size:14px; display:flex; align-items:center; }
+  .skill-tags{ display:flex; flex-wrap:wrap; gap:6px; margin-top:12px; }
+  @media (max-width:780px){ .skill-grid{ grid-template-columns:1fr 1fr; } }
+  @media (max-width:520px){ .skill-grid{ grid-template-columns:1fr; } }
+
+  /* ---------- Education + Profile ---------- */
+  .split{ display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+  .profile-card{ padding:22px; display:flex; gap:16px; align-items:center; }
+  .profile-card img{ width:64px; height:64px; border-radius:14px; object-fit:cover; }
+  .profile-card .name{ font-family:var(--display); font-weight:700; font-size:15px; }
+  .profile-card .role{ font-size:12.5px; color:var(--ink-dim); margin-top:2px; }
+  .tl-card{ padding:22px; }
+  .tl-item{ display:flex; gap:14px; padding:10px 0; }
+  .tl-item + .tl-item{ border-top:1px solid var(--hairline); }
+  .tl-dot{ width:8px; height:8px; border-radius:50%; background:var(--indigo); margin-top:6px; flex-shrink:0; }
+  .tl-title{ font-weight:700; font-size:14px; }
+  .tl-sub{ color:var(--ink-dim); font-size:12.5px; margin-top:2px; }
+  @media (max-width:780px){ .split{ grid-template-columns:1fr; } }
+
+  /* ---------- Contact ---------- */
+  .contact-card{
+    padding:36px; text-align:center;
+    background:linear-gradient(135deg, rgba(91,95,242,0.12), rgba(18,184,164,0.12));
+  }
+  .contact-title{ font-family:var(--display); font-weight:700; font-size:24px; }
+  .contact-sub{ color:var(--ink-dim); font-size:14.5px; margin-top:8px; max-width:420px; margin-left:auto; margin-right:auto; }
+  .contact-links{ margin-top:22px; display:flex; justify-content:center; gap:12px; flex-wrap:wrap; }
+
+  footer{ padding:26px 0 40px; text-align:center; font-family:var(--mono); font-size:11.5px; color:var(--ink-faint); }
+
+  @media (max-width:640px){
+    .navbar{ padding:10px 14px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="mesh">
+  <div class="blob b1"></div>
+  <div class="blob b2"></div>
+  <div class="blob b3"></div>
+  <div class="blob b4"></div>
+</div>
+
+<nav>
+  <div class="wrap">
+    <div class="navbar glass">
+      <div class="brand">
+        <div class="brand-mark">M</div>
+        <div class="brand-name">Mohamed Mahmoud</div>
+      </div>
+      <div class="tabs">
+        <a href="#overview">Overview</a>
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <div class="nav-avatar"><img src="assets/profile.jpg" alt="Mohamed Mahmoud"></div>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="overview">
+  <div class="wrap">
+    <div class="greeting"><span class="dot"></span><span id="greetingText">Good day</span> — here's the overview</div>
+    <h1 class="hero-title">Full-stack developer &amp; <span class="grad">AI engineer</span>, shipping products for clients across MENA.</h1>
+    <p class="hero-sub">I design, build, and deploy production web platforms and ML systems — from database schema to live server, end to end.</p>
+    <div class="hero-cta">
+      <a href="#projects" class="btn btn-primary">View projects →</a>
+      <a href="#contact" class="btn btn-ghost">Start a project</a>
+    </div>
+
+    <div class="stat-row">
+      <div class="stat-card glass i1 reveal"><div class="stat-num">4</div><div class="stat-label">PROJECTS SHIPPED</div></div>
+      <div class="stat-card glass i2 reveal"><div class="stat-num">2</div><div class="stat-label">LIVE IN PRODUCTION</div></div>
+      <div class="stat-card glass i3 reveal"><div class="stat-num">MENA</div><div class="stat-label">CLIENT REGION</div></div>
+      <div class="stat-card glass i4 reveal"><div class="stat-num">AI</div><div class="stat-label">CURRENT FOCUS</div></div>
+    </div>
+  </div>
+</header>
+
+<section id="projects">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-eyebrow">Projects</span>
+      <span class="section-title">What I've been building</span>
+    </div>
+
+    <div class="project-grid">
+      <div class="project-card glass p1 reveal">
+        <div class="project-top"></div>
+        <div class="project-inner">
+          <div class="project-head">
+            <span class="project-name">Science Smart Portal</span>
+            <span class="badge">Live</span>
+          </div>
+          <p class="project-desc">Flagship multi-role education platform, built and deployed end-to-end in a single intensive session — self-hosted with a full production setup.</p>
+          <div class="kpi-row">
+            <div class="kpi"><div class="kpi-num">5</div><div class="kpi-label">USER ROLES</div></div>
+            <div class="kpi"><div class="kpi-num">16</div><div class="kpi-label">DB TABLES</div></div>
+          </div>
+          <div class="tag-row">
+            <span class="tag">React 19</span><span class="tag">TypeScript</span><span class="tag">Node/Express</span>
+            <span class="tag">Drizzle</span><span class="tag">Neon Postgres</span><span class="tag">Nginx + SSL</span>
+          </div>
+          <div class="project-links">
+            <a href="https://sciencesmartportal.online" target="_blank" rel="noopener">Visit live site →</a>
+            <a href="https://github.com/mohamedmahmoud136" target="_blank" rel="noopener">Repo →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card glass p2 reveal">
+        <div class="project-top"></div>
+        <div class="project-inner">
+          <div class="project-head">
+            <span class="project-name">FleetSentry</span>
+            <span class="badge">Live</span>
+          </div>
+          <p class="project-desc">Fleet safety risk-prediction tool — takes fleet, route, weather, and road inputs and returns accident severity, key risk drivers, and safety recommendations.</p>
+          <div class="kpi-row">
+            <div class="kpi"><div class="kpi-num">Spark</div><div class="kpi-label">BIG DATA ENGINE</div></div>
+            <div class="kpi"><div class="kpi-num">ASORC</div><div class="kpi-label">SPONSOR</div></div>
+          </div>
+          <div class="tag-row">
+            <span class="tag">Databricks</span><span class="tag">Spark</span><span class="tag">AutoML</span><span class="tag">Python</span>
+          </div>
+          <div class="project-links">
+            <a href="https://fleetsentry.ftp.sh" target="_blank" rel="noopener">Visit live site →</a>
+            <a href="https://github.com/mohamedmahmoud136" target="_blank" rel="noopener">Repo →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card glass p3 reveal">
+        <div class="project-top"></div>
+        <div class="project-inner">
+          <div class="project-head">
+            <span class="project-name">MVP Shop (Multi-tenant SaaS)</span>
+            <span class="badge case">Portfolio piece</span>
+          </div>
+          <p class="project-desc">Multi-tenant SaaS e-commerce and website builder, architected for the Egyptian market as a standalone product — role-based access across Admin, Owner, Customer, and Guest tiers.</p>
+          <div class="kpi-row">
+            <div class="kpi"><div class="kpi-num">4</div><div class="kpi-label">USER ROLES</div></div>
+            <div class="kpi"><div class="kpi-num">RBAC</div><div class="kpi-label">ACCESS MODEL</div></div>
+          </div>
+          <div class="tag-row">
+            <span class="tag">Next.js</span><span class="tag">Express</span><span class="tag">MongoDB</span><span class="tag">JWT</span>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/mohamedmahmoud136" target="_blank" rel="noopener">Repo →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card glass p4 reveal">
+        <div class="project-top"></div>
+        <div class="project-inner">
+          <div class="project-head">
+            <span class="project-name">CampusFlow AI</span>
+            <span class="badge case">Portfolio piece</span>
+          </div>
+          <p class="project-desc">AI-integrated platform for automating academic and campus workflows, built with TypeScript and AI integration at its core.</p>
+          <div class="tag-row">
+            <span class="tag">TypeScript</span><span class="tag">AI Integration</span>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/mohamedmahmoud136" target="_blank" rel="noopener">Repo →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-eyebrow" style="background:var(--teal);">Skills</span>
+      <span class="section-title">Toolbox</span>
+    </div>
+    <div class="skill-grid">
+      <div class="skill-card glass reveal">
+        <div class="skill-cat"><span class="skill-dot" style="background:var(--indigo);"></span>Frontend</div>
+        <div class="skill-tags">
+          <span class="tag">React</span><span class="tag">Next.js</span><span class="tag">TypeScript</span><span class="tag">Vite</span>
+        </div>
+      </div>
+      <div class="skill-card glass reveal">
+        <div class="skill-cat"><span class="skill-dot" style="background:var(--teal);"></span>Backend</div>
+        <div class="skill-tags">
+          <span class="tag">Node.js</span><span class="tag">Express</span><span class="tag">NestJS</span>
+        </div>
+      </div>
+      <div class="skill-card glass reveal">
+        <div class="skill-cat"><span class="skill-dot" style="background:var(--amber);"></span>Databases</div>
+        <div class="skill-tags">
+          <span class="tag">PostgreSQL</span><span class="tag">MongoDB</span>
+        </div>
+      </div>
+      <div class="skill-card glass reveal">
+        <div class="skill-cat"><span class="skill-dot" style="background:var(--coral);"></span>Deployment</div>
+        <div class="skill-tags">
+          <span class="tag">Ubuntu</span><span class="tag">Nginx</span><span class="tag">PM2</span><span class="tag">SSL</span>
+        </div>
+      </div>
+      <div class="skill-card glass reveal">
+        <div class="skill-cat"><span class="skill-dot" style="background:var(--indigo);"></span>Data / AI</div>
+        <div class="skill-tags">
+          <span class="tag">Databricks</span><span class="tag">Spark</span><span class="tag">AutoML</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap">
+    <div class="split">
+      <div class="profile-card glass reveal">
+        <img src="assets/profile.jpg" alt="Mohamed Mahmoud">
+        <div>
+          <div class="name">Mohamed Mahmoud</div>
+          <div class="role">Assiut, Egypt · Freelance across MENA</div>
+        </div>
+      </div>
+      <div class="tl-card glass reveal">
+        <div class="tl-item">
+          <span class="tl-dot"></span>
+          <div>
+            <div class="tl-title">B.Sc. Computer Science &amp; AI</div>
+            <div class="tl-sub">Sphinx University</div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <span class="tl-dot" style="background:var(--amber);"></span>
+          <div>
+            <div class="tl-title">AI Diploma — in progress</div>
+            <div class="tl-sub">Instant Software Solutions</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <div class="contact-card glass reveal">
+      <div class="contact-title">Let's build something.</div>
+      <p class="contact-sub">Open for freelance projects — full-stack apps, SaaS platforms, and AI-driven systems.</p>
+      <div class="contact-links">
+        <a href="mailto:mhmedmahmod553@gmail.com" class="btn btn-primary">✉ Email me</a>
+        <a href="https://github.com/mohamedmahmoud136" target="_blank" rel="noopener" class="btn btn-ghost">GitHub</a>
+        <a href="https://www.linkedin.com/in/mohamed-mahmoud-037880384/" target="_blank" rel="noopener" class="btn btn-ghost">LinkedIn</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>Assiut, Egypt — built with HTML · CSS · JS</footer>
+
+<script>
+(function(){
+  var h = new Date().getHours();
+  var g = h < 12 ? 'Good morning' : h < 18 ? 'Good afternoon' : 'Good evening';
+  var el = document.getElementById('greetingText');
+  if(el) el.textContent = g + ', I\'m Mohamed';
+
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var els = document.querySelectorAll('.reveal');
+  if('IntersectionObserver' in window && !reduceMotion){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.12 });
+    els.forEach(function(el){ io.observe(el); });
+  } else {
+    els.forEach(function(el){ el.classList.add('in'); });
+  }
+})();
+</script>
+
+</body>
+</html>
